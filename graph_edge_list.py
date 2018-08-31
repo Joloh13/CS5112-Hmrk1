@@ -12,7 +12,9 @@ class Graph:
   def add_edge(self, node1, node2, weight):
     # Adds a directed edge from `node1` to `node2` to the graph with weight
     # defined by `weight`.
-    raise NotImplementedError
+    if not self.has_edge(node1, node2):
+        edgeTuple = (node1, node2, weight)
+        self.graph.append(edgeTuple)
 
   def has_edge(self, node1, node2):
     # Returns whether the graph contains an edge from `node1` to `node2`.
@@ -23,4 +25,9 @@ class Graph:
     # Returns the neighbors of `node` as a list of tuples [(x, y), ...] where
     # `x` is the neighbor node, and `y` is the weight of the edge from `node`
     # to `x`.
-    raise NotImplementedError
+    neighborTuplesList = []
+    for edgeTuple in self.graph:
+        if edgeTuple[0] == node:
+            neighborTuple = (edgeTuple[1], edgeTuple[2])
+            neighborTuplesList.append(neighborTuple)
+    return neighborTuplesList
