@@ -20,7 +20,7 @@ def shortest_path(graph, source, target):
   # return value of this method.
 
   # YOUR CODE HERE
- discovered = []
+    discovered = []
     hq = []
     distances = {source: 0}
     heapq.heappush(hq, [0, source, [source]])
