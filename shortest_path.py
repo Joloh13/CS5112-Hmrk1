@@ -1,5 +1,6 @@
 # Please see instructions.txt for the description of this problem.
-from exceptions import NotImplementedError
+import heapq
+import copy
 
 def shortest_path(graph, source, target):
   # `graph` is an object that provides a get_neighbors(node) method that returns
@@ -19,4 +20,30 @@ def shortest_path(graph, source, target):
   # return value of this method.
 
   # YOUR CODE HERE
-  raise NotImplementedError
+ discovered = []
+    hq = []
+    distances = {source: 0}
+    heapq.heappush(hq, [0, source, [source]])
+
+    while hq:
+
+        lowestCost = heapq.heappop(hq) #will return [weight, node]
+
+        if lowestCost[1] == target:
+            print("This is the distance of the shortest path:{}".format(distances[lowestCost[1]]))
+            print("This is the shortest path:{}".format(lowestCost[2]))
+            return lowestCost[2], distances[lowestCost[1]]
+
+        if lowestCost[1] not in discovered:
+            discovered.append(lowestCost[1])
+            for x in graph.get_neighbors(lowestCost[1]):
+                tentativeDist = distances[lowestCost[1]] + x[1]
+                if x[0] in distances:
+                    if tentativeDist < distances[x[0]]:
+                        distances[x[0]] = tentativeDist
+                else:
+                    distances[x[0]] = tentativeDist
+
+                tentativeList = copy.copy(lowestCost[2])
+                tentativeList.append(x[0])
+                heapq.heappush(hq, (x[1], x[0], tentativeList))
