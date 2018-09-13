@@ -32,7 +32,7 @@ except:
 try:
   print("Testing edge list graph...")
   edge_graph = EdgeGraph()
-  edge_graph.add_edge('a', 'b', 1) 
+  edge_graph.add_edge('a', 'b', 1)
   if not edge_graph.has_edge('a', 'b'):
     print "Your code ran, but did NOT give True when checking whether the graph has an edge ('a', 'b') after adding edge ('a', 'b', 1)."
   else:
